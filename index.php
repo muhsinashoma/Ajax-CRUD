@@ -11,16 +11,18 @@
 <body>
 	
 	
-	<!-- STUDENT ADD MODAL  -->
+	<!-- STUDENT ADD MODAL  here today  -->
 	<div id="student_add_modal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
-					<h2>Add new student</h2>
+					<h2>Add new student Test </h2>
 					<div class="mess"></div>
 					<hr>
-					<form id="add_student_form" action="" method="POST" enctype="multipart/form-data">
-						<div class="form-group">
+<!--<form id="add_student_form" action="" method="POST" enctype="multipart/form-data">-->
+
+                    <form id="add_student_form" action="" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
 							<label for="">Name</label>
 							<input class="form-control" name="name" type="text">
 						</div>
@@ -51,7 +53,7 @@
 	</div>
 
 
-	<!-- STUDENT ADD MODAL  -->
+	<!-- STUDENT ADD MODAL Update -->
 	<div id="student_update_modal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -133,7 +135,7 @@
 	</div>
 
 	<div class="wrap-table ">
-		<a id="student_show" class="btn btn-primary btn-sm" href="#">Add new student</a>
+		<a id="student_show" class="btn btn-primary btn-sm" href="#">Add new student Form</a>
 		<div class="card shadow">
 			<div class="card-body">
 				<h2>All Students</h2>

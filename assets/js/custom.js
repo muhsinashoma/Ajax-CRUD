@@ -8,6 +8,12 @@
 			return false;
 		});
 
+
+
+
+
+
+
 		// Show single_student_modal
 		// $(document).on('click','a#single_show', function(){
 		// 	$('#single_student_modal').modal('show');
@@ -39,157 +45,47 @@
 		// });
 
 
-		// Add new Student 
-		$('form#add_student_form').submit(function(e){
+
+
+		//  Add New Student today here
+
+		$('form#add_student_form').submit(function (e) {
 			e.preventDefault();
+			alert('test purpose');
 
-			// Get some input field value 
-			let name = $('input[name="name"]').val();
-			let email = $('input[name="email"]').val();
-			let cell = $('input[name="cell"]').val();
+			//Get some input field value
+			var name = $('input[name="name"]').val();
+			var email = $('input[name="email"]').val();
+			var cell = $('input[name="cell"]').val();
 
+			alert(name + email + cell);
 
-			if ( name == '' || email == '' || cell == '' ) 
-			{
-				$('.mess').html('<p class="alert alert-danger">All fields are required ! <button class="close" data-dismiss="alert">&times;</button></p>');
-			}else {
+                if ( name == '' || email == '' || cell == '' )
+                {
+                    $('.mess').html('<p class="alert alert-danger">All fields are required TEST VALUE ! <button class="close" data-dismiss="alert">&times;</button></p>');
+                }
 
-				$.ajax({
-					url : 'inc/ajax/student_add.php',
-					data : new FormData(this),
-					method : "POST",
-					contentType : false,
-					processData : false,
-					success : function(data){
+                else {
+                	$.ajax({
+						url : 'inc/ajax/student.php',
+							  data : new FormData(this),
+							  method : "POST",	
+							  contentType : false,
+							  processData : false,
+						      success : function (data) {
+							   //alert(data);
 
-
-						$('form#add_student_form')[0].reset();
-						$('#student_add_modal').modal('hide');
-						$('.mess-all').html(data);
-						allStudentData();
-
-					}
-				});
-
-			}
-
-
-
-		});
-
-		// Show All student Data 
-		function allStudentData(){
-			$.ajax({
-				url : 'inc/ajax/show_all.php',
-				success : function(data){
-					$('tbody#all_students_data').html(data);
-				}
-			});
-		}
-
-		allStudentData();
-
-
-		// Delete Student 
-		$(document).on('click','a#delete_student', function(){
-			
-			let delete_id = $(this).attr('student_id');
-
-			let conf  = confirm('Are you sure ? ');
-
-			if( conf == true ){
-
-				$.ajax({
-					url : 'inc/ajax/delete_student.php',
-					data : { id : delete_id  },
-					method : "POST",
-					success : function(data){
+                              }
 						
-						$('.mess-all').html('<p class="alert alert-success">Student data deleted successfull  ! <button class="close" data-dismiss="alert">&times;</button></p>');
-						allStudentData();
-
-					}
-				});
-			}else {
-
-				return false;
-
-			}
-
-			
-
-
-			return false;
-		});
-
-		// Single Student Data Seach
-		function singleStudent(student_id){
-
-			$.ajax({
-				url : 'inc/ajax/edit_student.php',
-				data : { id : student_id },
-				method : "POST", 
-				success : function(data){
-					let edit_data = JSON.parse(data);
-					
-					$('#student_update_modal input[name="name"]').val(edit_data.name);
-					$('#student_update_modal input[name="student_id"]').val(edit_data.id);
-					$('#student_update_modal input[name="email"]').val(edit_data.email);
-					$('#student_update_modal input[name="cell"]').val(edit_data.cell);
-					$('#student_update_modal input[name="old_photo"]').val(edit_data.photo);
-					$('#student_update_modal img').attr('src', 'media/students/' +  edit_data.photo);
-					
+					});
 
 				}
 
-			});
-
-
-		}
-
-
-		// Edit Student Data 
-		$(document).on('click','a#edit_student', function(e){
-			e.preventDefault();
-
-			let edit_id = $(this).attr('chatro_id');
-
-			singleStudent(edit_id);
-
-
-			$('#student_update_modal').modal('show');
-
-			
-
-		});
+        });
 
 
 
 
-
-		// Update Student Data 
-		$(document).on('submit', 'form#update_student_form', function(event){
-			event.preventDefault();
-
-			$.ajax({
-				url : 'inc/ajax/update_student.php',
-				data : new FormData(this),
-				contentType : false,
-				processData : false,
-				method	 : "POST",
-				success : function(data){
-
-					// $('#student_update_modal').modal('hide');
-					$('.mess').html('<p class="alert alert-success">Student data Updated successfull  ! <button class="close" data-dismiss="alert">&times;</button></p>');
-					allStudentData();
-					singleStudent(data);
-
-					
-
-				}
-			});
-
-		});
 
 
 
